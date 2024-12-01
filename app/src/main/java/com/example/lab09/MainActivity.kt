@@ -38,9 +38,17 @@ class MainActivity : AppCompatActivity() {
             R.id.about_us -> {
                 //buka chrome atau internet dan tunjukkan website tertentu: peoplelogy
                 //try "val intent" OR ""
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://peoplelogy.com/our-story/"))
+                startActivity(intent)
             }
             R.id.email_us -> {
                 //buka email dan set email title : App Feedback and to: "contact@peoplelogy.com.my"
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    type = "message/rfc822"
+                    putExtra(Intent.EXTRA_EMAIL, arrayOf("contact@peoplelogy.com.my"))
+                    putExtra(Intent.EXTRA_SUBJECT, "App Feedback")
+                }
+                startActivity(Intent.createChooser(intent, "Send Email"))
             }
             R.id.call_us -> {
                 //add second option to call directly the number
